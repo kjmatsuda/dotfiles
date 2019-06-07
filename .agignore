@@ -1,0 +1,9 @@
+*~
+*.swp
+*.bak
+*.old
+tmp
+old
+.git
+.svn
+node_modules
