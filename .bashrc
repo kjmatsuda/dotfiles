@@ -12,6 +12,29 @@ esac
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
 
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -115,3 +138,20 @@ export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}
 if [ $(pwd) = "/mnt/c/Users/kjmat/AppData/Local/Ubuntu" ]; then
     cd ~/
 fi    
+
+# 環境変数の読み込み
+source ~/.env
+. "$HOME/.cargo/env"
+export LANG=ja_JP.UTF-8
+
+# 音声出力のための設定
+# export PULSE_SERVER=unix:$(sed 's/unix://g' <<< "$PULSE_SERVER")
+
+# vscode を ビルドするときに'libsecret-1'でエラーが出たので以下を追加
+# export PKG_CONFIG_PATH=/path/to/libsecret-1.pc:$PKG_CONFIG_PATH
+
+# ubuntuが起動したときにdockerのサービスが動いてなければ、service docker startを実行
+if [ $(service docker status | grep "Active" | awk '{print $3}' | tr -d "()") = "dead" ]; then
+  sudo service docker start & > /dev/null
+fi
+
