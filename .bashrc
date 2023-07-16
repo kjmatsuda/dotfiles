@@ -137,11 +137,17 @@ export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}
 # Minisforum だと初期表示時にホームを開けないのでホームに移動
 if [ $(pwd) = "/mnt/c/Users/kjmat/AppData/Local/Ubuntu" ]; then
     cd ~/
-fi    
+fi
 
 # 環境変数の読み込み
-source ~/.env
-. "$HOME/.cargo/env"
+if [ -e "${HOME}/.env" ]; then
+    source ~/.env
+fi
+
+if [ -e "${HOME}/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+fi
+
 export LANG=ja_JP.UTF-8
 
 # 音声出力のための設定
@@ -154,4 +160,3 @@ export LANG=ja_JP.UTF-8
 if [ $(service docker status | grep "Active" | awk '{print $3}' | tr -d "()") = "dead" ]; then
   sudo service docker start & > /dev/null
 fi
-
