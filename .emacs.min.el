@@ -24,8 +24,6 @@
         (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
             (normal-top-level-add-subdirs-to-load-path))))))
 
-(add-to-load-path "~/.emacs.min.d/straight/build/")
-
 ;; straight.el自身のインストールと初期設定を行ってくれる
 (let ((bootstrap-file (concat user-emacs-directory "straight/repos/straight.el/bootstrap.el"))
       (bootstrap-version 3))
