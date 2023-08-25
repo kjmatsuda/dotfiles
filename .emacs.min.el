@@ -18,7 +18,7 @@
     (dolist (path paths paths)
       (let ((default-directory (expand-file-name path)))
         (add-to-list 'load-path default-directory)
-s        (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+        (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
             (normal-top-level-add-subdirs-to-load-path))))))
 
 (add-to-load-path "~/.emacs.min.d/straight/build/")
