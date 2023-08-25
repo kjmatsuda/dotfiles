@@ -10,6 +10,9 @@
 ;; オートセーブファイルを作らない
 (setq auto-save-default nil)
 
+(if (not (file-directory-p "~/.emacs.min.d/"))
+    (make-directory "~/.emacs.min.d/"))
+
 (setq user-emacs-directory "~/.emacs.min.d/")
 
 ;; load-pathをサブディレクトリごと追加する関数を定義
