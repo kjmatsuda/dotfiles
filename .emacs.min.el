@@ -42,6 +42,7 @@
 ;; use-packageをインストールする
 (straight-use-package 'use-package)
 
+(add-to-load-path "~/.emacs.min.d/straight/build/")
 
 ;; OSのタイプを格納
 (defvar os-type nil)
