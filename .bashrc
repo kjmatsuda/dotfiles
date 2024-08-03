@@ -130,7 +130,11 @@ umask 022
 
 # 2023/04/05 WSLg をインストールしたのに合わせて VcXsrv 用の設定を無効化する
 #   2023/04/15 やっぱりウィンドウ制御の面でVcXsrvの方が使いやすいので元に戻す
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+# export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+# 2024/08/03 以下のページに改善策がある
+# WSL2におけるVcXsrvの設定 #WSL - Qiita
+# https://qiita.com/ryoi084/items/0dff11134592d0bb895c
+export DISPLAY=`hostname`.mshome.net:0.0
 
 #export GDK_SCALE=2
 
